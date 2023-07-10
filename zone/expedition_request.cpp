@@ -347,15 +347,16 @@ bool ExpeditionRequest::IsPlayerCountValidated()
 	// note: offline group members count towards requirement but not added to expedition
 	bool requirements_met = true;
 
-	auto bypass_status = RuleI(Expedition, MinStatusToBypassPlayerCountRequirements);
-	auto gm_bypass = (m_requester && m_requester->GetGM() && m_requester->Admin() >= bypass_status);
+	int gmbypass_status = RuleI(Expedition, MinStatusToBypassPlayerCountRequirements);
+	bool gm_bypass = (m_requester && m_requester->GetGM() && m_requester->Admin() >= gmbypass_status);
+	bool player_bypass = RuleB(Expedition, BypassPlayerCountRequirements);
 
 	if (m_members.size() > m_max_players)
 	{
 		// members were sorted at start, truncate after conflict checks to act like live
 		m_members.resize(m_max_players);
 	}
-	else if (!gm_bypass && m_members.size() < m_min_players)
+	else if (!gm_bypass && !player_bypass && m_members.size() < m_min_players)
 	{
 		requirements_met = false;
 

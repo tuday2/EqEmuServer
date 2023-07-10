@@ -823,6 +823,7 @@ RULE_CATEGORY_END()
 
 RULE_CATEGORY(Expedition)
 RULE_INT(Expedition, MinStatusToBypassPlayerCountRequirements, 80, "Minimum GM status to bypass minimum player requirements for Expedition creation")
+RULE_BOOL(Expedition, BypassPlayerCountRequirements, false, "Bypass minimum player requirements for Expedition creation")
 RULE_BOOL(Expedition, AlwaysNotifyNewLeaderOnChange, false, "Always notify clients when made expedition leader. If false (live-like) new leaders are only notified when made leader via /dzmakeleader")
 RULE_REAL(Expedition, LockoutDurationMultiplier, 1.0, "Multiplies lockout duration by this value when new lockouts are added")
 RULE_INT(Expedition, ChooseLeaderCooldownTime, 2000, "Cooldown time (milliseconds) between choosing a new leader for automatic leader changes")
